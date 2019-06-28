@@ -80,7 +80,6 @@ namespace MQTT {
     //% block="Connect to MQTT server %server | Port %port | ID %id | Username %user | Password %password"
     //% blockExternalInputs=true
     //% weight=48
-    //% subcategory=MQTT
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
         serial.writeString("+MQTT\r\n");
         basic.pause(500);
