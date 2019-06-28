@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace ESP8266 {
+namespace serialBuffer {
 
     //%
     void setSerialBuffer(int size) {
