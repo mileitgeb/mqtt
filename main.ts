@@ -1,6 +1,6 @@
 //%color=#0B0B61 icon="\uf1eb" block="MQTT"
 
-namespace MQTT {
+namespace MQTT { 
 
     //% shim=serialBuffer::setSerialBuffer
     function setSerialBuffer(size: number): void {
