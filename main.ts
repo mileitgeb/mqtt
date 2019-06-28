@@ -31,7 +31,7 @@ namespace MQTT {
     //% tx.fieldOptions.tooltips="false"
     //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
     //% rx.fieldOptions.tooltips="false"
-    //% weight = 100
+    //% weight = 50
     export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
         serial.redirect(tx, rx, baudrate);
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
@@ -67,7 +67,7 @@ namespace MQTT {
     }
 
     //% block="Set WiFi to SSID %ssid | PWD %pwd"
-    //% weight=99
+    //% weight=49
     export function setWiFi(ssid: string, pwd: string): void {
         serial.writeString("+WiFi\r\n");
         basic.pause(500);
@@ -77,9 +77,9 @@ namespace MQTT {
         basic.pause(500);
     }
 
-    //% block="Connect to MQTT server %server | Port %port | ID %id | User %user | User % password"
+    //% block="Connect to MQTT server %server | Port %port | ID %id | Username %user | PWD % password"
     //% blockExternalInputs=true
-    //% weight=98
+    //% weight=48
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
         serial.writeString("+MQTT\r\n");
         basic.pause(500);
@@ -88,6 +88,8 @@ namespace MQTT {
         serial.writeNumber(port);
         serial.writeString("\r\n");
         basic.pause(500);
+        serial.writeString(id + "\r\n");
+        basic.pause(500);
         serial.writeString(user + "\r\n");
         basic.pause(500);
         serial.writeString(password + "\r\n");
@@ -95,7 +97,7 @@ namespace MQTT {
     }
 
     //% block="Subscribe topic %topic"
-    //% weight=97
+    //% weight=47
     export function MQTTSub(topic: string): void {
         mqttTopics.push(topic);
         serial.writeString("+MQTTSub");
@@ -105,7 +107,7 @@ namespace MQTT {
     }
 
     //% block="Publish to topic %topic | message %payload"
-    //% weight=96
+    //% weight=46
     export function MQTTPub(topic: string, payload: string): void {
         serial.writeString("+MQTTPub\r\n");
         basic.pause(500);
