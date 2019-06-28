@@ -19,7 +19,7 @@ namespace MQTT {
 
     let mqttTopics: string[] = [""];
 
-    //% shim=ESP8266::setSerialBuffer
+    //% shim=serialBuffer::setSerialBuffer
     function setSerialBuffer(size: number): void {
         return null;
     }
