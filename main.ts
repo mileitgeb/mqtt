@@ -25,13 +25,13 @@ namespace MQTT {
 
     let mqttTopics: string[] = [""];
 
-    //%block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate"
-    //%baudrate.defl=BaudRate.BaudRate115200
+    //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate"
+    //% baudrate.defl=BaudRate.BaudRate115200
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
     //% tx.fieldOptions.tooltips="false"
     //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
     //% rx.fieldOptions.tooltips="false"
-    //% wright = 100
+    //% weight = 100
     export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
         serial.redirect(tx, rx, baudrate);
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
