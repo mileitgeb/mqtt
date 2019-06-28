@@ -83,18 +83,18 @@ namespace MQTT {
     //% blockExternalInputs=true
     //% weight=48
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
-        serial.writeString("+MQTT\r\n");
+        serial.writeString("+MQTT\n");
         basic.pause(2000);
-        serial.writeString(server + "\r\n");
+        serial.writeString(server + "\n");
         basic.pause(2000);
         serial.writeNumber(port);
-        serial.writeString("\r\n");
+        serial.writeString("\n");
         basic.pause(2000);
-        serial.writeString(id + "\r\n");
+        serial.writeString(id + "\n");
         basic.pause(2000);
-        serial.writeString(user + "\r\n");
+        serial.writeString(user + "\n");
         basic.pause(2000);
-        serial.writeString(password + "\r\n");
+        serial.writeString(password + "\n");
         basic.pause(2000);
     }
 
@@ -104,18 +104,18 @@ namespace MQTT {
         mqttTopics.push(topic);
         serial.writeString("+MQTTSub");
         basic.pause(2000);
-        serial.writeString(topic + "\r\n");
+        serial.writeString(topic + "\n");
         basic.pause(2000);
     }
 
     //% block="Publish to topic %topic | message %payload"
     //% weight=46
     export function MQTTPub(topic: string, payload: string): void {
-        serial.writeString("+MQTTPub\r\n");
+        serial.writeString("+MQTTPub\n");
         basic.pause(2000);
-        serial.writeString(topic + "\r\n");
+        serial.writeString(topic + "\n");
         basic.pause(2000);
-        serial.writeString(payload + "\r\n");
+        serial.writeString(payload + "\n");
         basic.pause(2000);
     }
 
