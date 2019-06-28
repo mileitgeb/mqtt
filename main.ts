@@ -120,33 +120,34 @@ namespace MQTT {
     }
 
     //% block="On MQTT received"
+    //% weight=45
     export function OnMQTTReceived(body: (topic: string, ReceivedMQTTMessage: string) => void): void {
         mqttmessage = body;
     }
 
     //% block="On WiFi connected"
-    //%advanced=true
+    //% advanced=true
     export function OnWiFiConnected(body: () => void) {
         wifiEvtConFlag = true;
         wificonnected();
     }
 
     //% block="On WiFI disconnect"
-    //%advanced=true
+    //% advanced=true
     export function OnWiFiDisconnect(body: () => void) {
         wifiEvtDConFlag = true;
         wifidisconnected();
     }
 
     //% block="On MQTT connected"
-    //%advanced=true
+    //% advanced=true
     export function OnMQTTConnected(body: () => void) {
         mqttEvtConFlag = true;
         mqttconnected();
     }
 
     //% block="On MQTT disconnect"
-    //%advanced=true
+    //% advanced=true
     export function OnMQTTDisconnect(body: () => void) {
         mqttEvtDConFlag = true;
         mqttdisconnected();
