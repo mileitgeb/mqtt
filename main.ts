@@ -2,6 +2,12 @@
 
 namespace MQTT {
 
+    //% shim=serialBuffer::setSerialBuffer
+    function setSerialBuffer(size: number): void {
+        return null;
+    }
+    setSerialBuffer(128);
+
     type EvtMsg = (topic: string, data: string) => void;
     type EvtAct = () => void;
 
@@ -19,18 +25,13 @@ namespace MQTT {
 
     let mqttTopics: string[] = [""];
 
-    //% shim=serialBuffer::setSerialBuffer
-    function setSerialBuffer(size: number): void {
-        return null;
-    }
-    setSerialBuffer(128);
-
     //%block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate"
     //%baudrate.defl=BaudRate.BaudRate115200
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
     //% tx.fieldOptions.tooltips="false"
     //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
     //% rx.fieldOptions.tooltips="false"
+    //% wright = 100
     export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
         serial.redirect(tx, rx, baudrate);
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
@@ -66,6 +67,7 @@ namespace MQTT {
     }
 
     //% block="Set WiFi to SSID %ssid | PWD %pwd"
+    //% weight=99
     export function setWiFi(ssid: string, pwd: string): void {
         serial.writeString("+WiFi\r\n");
         basic.pause(500);
@@ -77,6 +79,7 @@ namespace MQTT {
 
     //% block="Connect to MQTT server %server | Port %port | ID %id | User name %user | User password % password"
     //% blockExternalInputs=true
+    //% weight=98
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
         serial.writeString("+MQTT\r\n");
         basic.pause(500);
@@ -92,6 +95,7 @@ namespace MQTT {
     }
 
     //% block="Subscribe topic %topic"
+    //% weight=97
     export function MQTTSub(topic: string): void {
         mqttTopics.push(topic);
         serial.writeString("+MQTTSub");
@@ -101,6 +105,7 @@ namespace MQTT {
     }
 
     //% block="Publish to topic %topic | message %payload"
+    //% weight=96
     export function MQTTPub(topic: string, payload: string): void {
         serial.writeString("+MQTTPub\r\n");
         basic.pause(500);
@@ -117,25 +122,25 @@ namespace MQTT {
 
     //% block="On WiFi connected"
     //%advanced=true
-    export function OnWiFiConnected(body: () => void){
+    export function OnWiFiConnected(body: () => void) {
         wificonnected();
     }
 
     //% block="On WiFI disconnect"
     //%advanced=true
-    export function OnWiFiDisconnect(body: () => void){
+    export function OnWiFiDisconnect(body: () => void) {
         wifidisconnected();
     }
 
     //% block="On MQTT connected"
     //%advanced=true
-    export function OnMQTTConnected(body: () => void){
+    export function OnMQTTConnected(body: () => void) {
         mqttconnected();
     }
 
     //% block="On MQTT disconnect"
     //%advanced=true
-    export function OnMQTTDisconnect(body: () => void){
+    export function OnMQTTDisconnect(body: () => void) {
         mqttdisconnected();
     }
 }
