@@ -71,11 +71,11 @@ namespace MQTT {
     //% block="Set WiFi to SSID %ssid | PWD %pwd"
     //% weight=49
     export function setWiFi(ssid: string, pwd: string): void {
-        serial.writeString("+WiFi\r\n");
+        serial.writeString("+WiFi\n");
         basic.pause(2000);
-        serial.writeString(ssid + "\r\n");
+        serial.writeString(ssid + "\n");
         basic.pause(2000);
-        serial.writeString(pwd + "\r\n");
+        serial.writeString(pwd + "\n");
         basic.pause(2000);
     }
 
