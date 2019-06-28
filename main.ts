@@ -17,8 +17,10 @@ namespace MQTT {
     let mqttdisconnected: EvtAct = null;
     let mqttmessage: EvtMsg = null;
 
-    let wifiEvtFlag: boolean = false;
-    let mqttEvtFlag: boolean = false;
+    let wifiEvtConFlag: boolean = false;
+    let wifiEvtDConFlag: boolean = false;
+    let mqttEvtConFlag: boolean = false;
+    let mqttEvtDConFlag: boolean = false;
 
     let mqttflag: boolean = false;
     let mqttTopic: string = "";
@@ -37,16 +39,16 @@ namespace MQTT {
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
-            if (serial_str.includes("WiFi connected") && wifiEvtFlag) {
+            if (serial_str.includes("WiFi connected") && wifiEvtConFlag) {
                 wificonnected();
             }
-            if (serial_str.includes("WiFi disconnected") && wifiEvtFlag) {
+            if (serial_str.includes("WiFi disconnected") && wifiEvtDConFlag) {
                 wifidisconnected();
             }
-            if (serial_str.includes("MQTT connected") && mqttEvtFlag) {
+            if (serial_str.includes("MQTT connected") && mqttEvtConFlag) {
                 mqttconnected();
             }
-            if (serial_str.includes("MQTT disconnect") && mqttEvtFlag) {
+            if (serial_str.includes("MQTT disconnect") && mqttEvtDConFlag) {
                 mqttdisconnected();
             }
             if (serial_str.includes("+MQM")) {
@@ -125,24 +127,28 @@ namespace MQTT {
     //% block="On WiFi connected"
     //%advanced=true
     export function OnWiFiConnected(body: () => void) {
+        wifiEvtConFlag = true;
         wificonnected();
     }
 
     //% block="On WiFI disconnect"
     //%advanced=true
     export function OnWiFiDisconnect(body: () => void) {
+        wifiEvtDConFlag = true;
         wifidisconnected();
     }
 
     //% block="On MQTT connected"
     //%advanced=true
     export function OnMQTTConnected(body: () => void) {
+        mqttEvtConFlag = true;
         mqttconnected();
     }
 
     //% block="On MQTT disconnect"
     //%advanced=true
     export function OnMQTTDisconnect(body: () => void) {
+        mqttEvtDConFlag = true;
         mqttdisconnected();
     }
 }
