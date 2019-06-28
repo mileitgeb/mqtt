@@ -72,11 +72,11 @@ namespace MQTT {
     //% weight=49
     export function setWiFi(ssid: string, pwd: string): void {
         serial.writeString("+WiFi\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(ssid + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(pwd + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
     }
 
     //% block="Connect to MQTT server %server | Port %port | ID %id | Username %user | Password %password"
@@ -84,18 +84,18 @@ namespace MQTT {
     //% weight=48
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
         serial.writeString("+MQTT\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(server + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeNumber(port);
         serial.writeString("\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(id + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(user + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(password + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
     }
 
     //% block="Subscribe topic %topic"
@@ -103,20 +103,20 @@ namespace MQTT {
     export function MQTTSub(topic: string): void {
         mqttTopics.push(topic);
         serial.writeString("+MQTTSub");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(topic + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
     }
 
     //% block="Publish to topic %topic | message %payload"
     //% weight=46
     export function MQTTPub(topic: string, payload: string): void {
         serial.writeString("+MQTTPub\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(topic + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
         serial.writeString(payload + "\r\n");
-        basic.pause(500);
+        basic.pause(2000);
     }
 
     //% block="On MQTT received"
