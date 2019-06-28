@@ -76,7 +76,6 @@ namespace MQTT {
         serial.writeString(ssid + "\n");
         basic.pause(2000);
         serial.writeString(pwd + "\n");
-        basic.pause(2000);
     }
 
     //% block="Connect to MQTT server %server | Port %port | ID %id | Username %user | Password %password"
@@ -95,7 +94,6 @@ namespace MQTT {
         serial.writeString(user + "\n");
         basic.pause(2000);
         serial.writeString(password + "\n");
-        basic.pause(2000);
     }
 
     //% block="Subscribe topic %topic"
@@ -105,7 +103,6 @@ namespace MQTT {
         serial.writeString("+MQTTSub\n");
         basic.pause(2000);
         serial.writeString(topic + "\n");
-        basic.pause(2000);
     }
 
     //% block="Publish to topic %topic | message %payload"
@@ -116,7 +113,6 @@ namespace MQTT {
         serial.writeString(topic + "\n");
         basic.pause(2000);
         serial.writeString(payload + "\n");
-        basic.pause(2000);
     }
 
     //% block="On MQTT received"
