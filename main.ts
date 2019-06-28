@@ -80,6 +80,7 @@ namespace MQTT {
     //% block="Connect to MQTT server %server | Port %port | ID %id | User name %user | User password % password"
     //% blockExternalInputs=true
     //% weight=98
+    //% subcategory=MQTT
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
         serial.writeString("+MQTT\r\n");
         basic.pause(500);
@@ -96,6 +97,7 @@ namespace MQTT {
 
     //% block="Subscribe topic %topic"
     //% weight=97
+    //% subcategory=MQTT
     export function MQTTSub(topic: string): void {
         mqttTopics.push(topic);
         serial.writeString("+MQTTSub");
@@ -106,6 +108,7 @@ namespace MQTT {
 
     //% block="Publish to topic %topic | message %payload"
     //% weight=96
+    //% subcategory=MQTT
     export function MQTTPub(topic: string, payload: string): void {
         serial.writeString("+MQTTPub\r\n");
         basic.pause(500);
