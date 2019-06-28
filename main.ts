@@ -129,27 +129,27 @@ namespace MQTT {
     //% advanced=true
     export function OnWiFiConnected(body: () => void) {
         wifiEvtConFlag = true;
-        wificonnected();
+        wificonnected = body;
     }
 
     //% block="On WiFI disconnect"
     //% advanced=true
     export function OnWiFiDisconnect(body: () => void) {
         wifiEvtDConFlag = true;
-        wifidisconnected();
+        wifidisconnected = body;
     }
 
     //% block="On MQTT connected"
     //% advanced=true
     export function OnMQTTConnected(body: () => void) {
         mqttEvtConFlag = true;
-        mqttconnected();
+        mqttconnected = body;
     }
 
     //% block="On MQTT disconnect"
     //% advanced=true
     export function OnMQTTDisconnect(body: () => void) {
         mqttEvtDConFlag = true;
-        mqttdisconnected();
+        mqttdisconnected = body;
     }
 }
