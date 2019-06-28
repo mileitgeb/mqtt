@@ -102,7 +102,7 @@ namespace MQTT {
     //% weight=47
     export function MQTTSub(topic: string): void {
         mqttTopics.push(topic);
-        serial.writeString("+MQTTSub");
+        serial.writeString("+MQTTSub\n");
         basic.pause(2000);
         serial.writeString(topic + "\n");
         basic.pause(2000);
