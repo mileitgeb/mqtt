@@ -1,6 +1,6 @@
 //%color=#0B0B61 icon="\uf1eb" block="MQTT"
 
-namespace MQTT { 
+namespace MQTT {
 
     //% shim=serialBuffer::setSerialBuffer
     function setSerialBuffer(size: number): void {
@@ -61,7 +61,7 @@ namespace MQTT {
             if (mqttflag) {
                 mqttflag = false;
                 let comma_pos: number = serial_str.indexOf(",");
-                let topic: string = serial_str.substr(5, comma_pos);
+                let topic: string = serial_str.substr(5, comma_pos - 5);
                 let msg: string = serial_str.substr(comma_pos + 1, );
                 mqttmessage(topic, msg);
             }
@@ -71,7 +71,7 @@ namespace MQTT {
     //% block="Set WiFi to SSID %ssid | PWD %pwd"
     //% weight=49
     export function setWiFi(ssid: string, pwd: string): void {
-        basic.pause(2000);
+        basic.pause(5000);
         serial.writeString("+WiFi\n");
         basic.pause(2000);
         serial.writeString(ssid + "\n");
