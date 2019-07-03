@@ -149,12 +149,14 @@ namespace MQTT {
 
     //% block="WiFi connected"
     //% advanced=true
+    //% weight=100
     export function flagwificonn(): boolean {
         return FlagWiFiCon;
     }
 
     //% block="MQTT connected"
     //% advanced=true
+    //% weight=99
     export function flagmqttconn(): boolean {
         return FlagMQTTCon;
     }
