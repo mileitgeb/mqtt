@@ -61,7 +61,7 @@ namespace MQTT {
             if (mqttflag) {
                 mqttflag = false;
                 let comma_pos: number = serial_str.indexOf(",");
-                let topic: string = serial_str.substr(5, comma_pos - 5);
+                let topic: string = serial_str.substr(5, comma_pos - 5) + serial.readString();
                 let msg: string = serial_str.substr(comma_pos + 1, );
                 mqttmessage(topic, msg);
             }
@@ -118,6 +118,7 @@ namespace MQTT {
 
     //% block="On MQTT received"
     //% weight=45
+    //% draggableParameters
     export function OnMQTTReceived(body: (topic: string, ReceivedMQTTMessage: string) => void): void {
         mqttmessage = body;
     }
