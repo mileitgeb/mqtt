@@ -121,6 +121,7 @@ namespace MQTT {
 
     //% block="On WiFi connected"
     //% advanced=true
+    // %weight = 98
     export function OnWiFiConnected(body: () => void) {
         wifiEvtConFlag = true;
         wificonnected = body;
@@ -128,6 +129,7 @@ namespace MQTT {
 
     //% block="On WiFI disconnect"
     //% advanced=true
+    // %weight = 97
     export function OnWiFiDisconnect(body: () => void) {
         wifiEvtDConFlag = true;
         wifidisconnected = body;
@@ -135,6 +137,7 @@ namespace MQTT {
 
     //% block="On MQTT connected"
     //% advanced=true
+    // %weight = 96
     export function OnMQTTConnected(body: () => void) {
         mqttEvtConFlag = true;
         mqttconnected = body;
@@ -142,6 +145,7 @@ namespace MQTT {
 
     //% block="On MQTT disconnect"
     //% advanced=true
+    // %weight = 95
     export function OnMQTTDisconnect(body: () => void) {
         mqttEvtDConFlag = true;
         mqttdisconnected = body;
