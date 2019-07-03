@@ -1,6 +1,6 @@
 {
     "name": "pxt-mqtt",
-    "version": "0.0.0",
+    "version": "0.0.4",
     "description": "",
     "dependencies": {
         "core": "*",
@@ -8,11 +8,12 @@
     },
     "files": [
         "README.md",
-        "main.ts"
+        "main.ts",
+        "main.cpp"
     ],
     "testFiles": [
         "test.ts"
     ],
     "public": false,
-    "additionalFilePaths": []
+    "preferredEditor": "tsprj"
 }
