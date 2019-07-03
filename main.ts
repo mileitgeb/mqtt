@@ -169,7 +169,7 @@ namespace MQTT {
 
     //--------------------------------------- ThingSpeak ---------------------------------------
 
-    //% block="Connect to ThingSpeak | User Name %user | Password %pwd
+    //% block="Connect to ThingSpeak | User Name %user | Password %pwd"
     //% subcategory=ThingSpeak
     //% blockExternalInputs=true
     export function connectThingSpeak(user: string, pwd: string): void {
