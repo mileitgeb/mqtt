@@ -22,11 +22,6 @@ namespace MQTT {
     let mqttEvtConFlag: boolean = false;
     let mqttEvtDConFlag: boolean = false;
 
-    let mqttflag: boolean = false;
-    let mqttTopic: string = "";
-
-    let mqttTopics: string[] = [""];
-
     let FlagMQTTCon: boolean = false;
     let FlagWiFiCon: boolean = false;
 
@@ -59,14 +54,6 @@ namespace MQTT {
                 mqttdisconnected();
             }
             if (serial_str.includes("+MQM")) {
-                for (let i = 0; i <= mqttTopics.length; i++) {
-                    mqttflag = true;
-                    mqttTopic = mqttTopics[i];
-                    break;
-                }
-            }
-            if (mqttflag) {
-                mqttflag = false;
                 let comma_pos: number = serial_str.indexOf(",");
                 let topic: string = serial_str.substr(5, comma_pos - 5);
                 let msg: string = serial_str.substr(comma_pos + 1, ) + serial.readString();
@@ -107,7 +94,6 @@ namespace MQTT {
     //% block="Subscribe topic %topic"
     //% weight=47
     export function MQTTSub(topic: string): void {
-        mqttTopics.push(topic);
         serial.writeString("+MQTTSub\n");
         basic.pause(2000);
         serial.writeString(topic + "\n");
@@ -159,11 +145,13 @@ namespace MQTT {
     }
 
     //% block="WiFi connected"
+    //% advanced=true
     export function flagwificonn(): boolean {
         return FlagWiFiCon;
     }
 
     //% block="MQTT connected"
+    //% advanced=true
     export function flagmqttconn(): boolean {
         return FlagMQTTCon;
     }
