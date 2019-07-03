@@ -27,6 +27,9 @@ namespace MQTT {
 
     let mqttTopics: string[] = [""];
 
+    let FlagMQTTCon: boolean = false;
+    let FlagWiFiCon: boolean = false;
+
     //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate"
     //% baudrate.defl=BaudRate.BaudRate115200
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
@@ -39,16 +42,20 @@ namespace MQTT {
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
-            if (serial_str.includes("WiFi connected") && wifiEvtConFlag) {
+            if (serial_str.includes("WiFi connected")) {
+                FlagWiFiCon = true;
                 wificonnected();
             }
-            if (serial_str.includes("WiFi disconnected") && wifiEvtDConFlag) {
+            if (serial_str.includes("WiFi disconnected")) {
+                FlagWiFiCon = false;
                 wifidisconnected();
             }
-            if (serial_str.includes("MQTT connected") && mqttEvtConFlag) {
+            if (serial_str.includes("MQTT connected")) {
+                FlagMQTTCon = true;
                 mqttconnected();
             }
-            if (serial_str.includes("MQTT disconnect") && mqttEvtDConFlag) {
+            if (serial_str.includes("MQTT disconnect")) {
+                FlagMQTTCon = false;
                 mqttdisconnected();
             }
             if (serial_str.includes("+MQM")) {
@@ -61,8 +68,8 @@ namespace MQTT {
             if (mqttflag) {
                 mqttflag = false;
                 let comma_pos: number = serial_str.indexOf(",");
-                let topic: string = serial_str.substr(5, comma_pos - 5) + serial.readString();
-                let msg: string = serial_str.substr(comma_pos + 1, );
+                let topic: string = serial_str.substr(5, comma_pos - 5);
+                let msg: string = serial_str.substr(comma_pos + 1, ) + serial.readString();
                 mqttmessage(topic, msg);
             }
         })
@@ -149,5 +156,15 @@ namespace MQTT {
     export function OnMQTTDisconnect(body: () => void) {
         mqttEvtDConFlag = true;
         mqttdisconnected = body;
+    }
+
+    //% block="WiFi connected"
+    export function flagwificonn(): boolean {
+        return FlagWiFiCon;
+    }
+
+    //% block="MQTT connected"
+    export function flagmqttconn(): boolean {
+        return FlagMQTTCon;
     }
 }
