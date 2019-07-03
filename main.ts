@@ -57,7 +57,7 @@ namespace MQTT {
             if (serial_str.includes("+MQM") && mqttEvtRecFlag) {
                 let comma_pos: number = serial_str.indexOf(",");
                 let topic: string = serial_str.substr(5, comma_pos - 5);
-                let msg: string = serial_str.substr(comma_pos + 1, serial_str.length - 1);
+                let msg: string = serial_str.substr(comma_pos + 1, serial_str.length - 2);
                 mqttmessage(topic, msg);
             }
         })
