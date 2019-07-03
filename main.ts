@@ -21,6 +21,7 @@ namespace MQTT {
     let wifiEvtDConFlag: boolean = false;
     let mqttEvtConFlag: boolean = false;
     let mqttEvtDConFlag: boolean = false;
+    let mqttEvtRecFlag: boolean = false;
 
     let FlagMQTTCon: boolean = false;
     let FlagWiFiCon: boolean = false;
@@ -39,21 +40,21 @@ namespace MQTT {
 
             if (serial_str.includes("WiFi connected")) {
                 FlagWiFiCon = true;
-                wificonnected();
+                if (wifiEvtConFlag) wificonnected();
             }
             if (serial_str.includes("WiFi disconnected")) {
                 FlagWiFiCon = false;
-                wifidisconnected();
+                if (wifiEvtDConFlag) wifidisconnected();
             }
             if (serial_str.includes("MQTT connected")) {
                 FlagMQTTCon = true;
-                mqttconnected();
+                if (mqttEvtConFlag) mqttconnected();
             }
             if (serial_str.includes("MQTT disconnect")) {
                 FlagMQTTCon = false;
-                mqttdisconnected();
+                if (mqttEvtDConFlag) mqttdisconnected();
             }
-            if (serial_str.includes("+MQM")) {
+            if (serial_str.includes("+MQM") && mqttEvtRecFlag) {
                 let comma_pos: number = serial_str.indexOf(",");
                 let topic: string = serial_str.substr(5, comma_pos - 5);
                 let msg: string = serial_str.substr(comma_pos + 1, ) + serial.readString();
@@ -113,6 +114,7 @@ namespace MQTT {
     //% weight=45
     //% draggableParameters
     export function OnMQTTReceived(body: (topic: string, ReceivedMQTTMessage: string) => void): void {
+        mqttEvtRecFlag = true;
         mqttmessage = body;
     }
 
