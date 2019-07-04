@@ -181,7 +181,7 @@ namespace MQTT {
     //% blockExternalInputs=true
     export function sendThingSpeak(id: number, api: string, fields: string[]): void {
         let ThingSpeakTopic: string = "channels/" + id + "/publish/" + api;
-        let payload: string;
+        let payload: string = "";
         for (let i = 0; i < fields.length; i++) {
             payload += "field" + (i + 1) + "=" + fields[i] + "&";
         }
