@@ -176,9 +176,10 @@ namespace MQTT {
         connectMQTT("mqtt.thingspeak.com", 1883, "" + Math.randomRange(0, 100000000000000), user, pwd);
     }
 
-    //% block="Send ThingSpeak | Channel ID %id | API Key %api | Data %fields"
+    //% block="Send ThingSpeak | Channel ID %id | API Key %api | field1 %field1 || field2: %field2 field3: %field3 field4: %field4 field5: %field5 field6: %field6 field7: %field7 field8: %field8""
     //% subcategory=ThingSpeak
     //% blockExternalInputs=true
+    //% expandableArgumentMode="enabled"
     export function sendThingSpeak(id: number, api: string, field1: number, field2?: number, field3?: number, field4?: number,
         field5?: number, field6?: number, field7?: number, field8?: number): void {
         let fields: number[] = [field1, field2, field3, field4, field5, field6, field7, field8]
