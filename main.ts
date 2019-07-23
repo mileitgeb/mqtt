@@ -74,7 +74,7 @@ namespace MQTT {
         serial.writeString(pwd + "\n");
     }
 
-    //% block="Connect to MQTT server %server | Port %port | ID %id | Username %user | Password %password"
+    //% block="Connect to MQTT server %server|Port %port|ID %id|Username %user|Password %password"
     //% blockExternalInputs=true
     //% weight=48
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
@@ -169,14 +169,14 @@ namespace MQTT {
 
     //--------------------------------------- ThingSpeak ---------------------------------------
 
-    //% block="Connect to ThingSpeak | User Name %user | Password %pwd"
+    //% block="Connect to ThingSpeak|User Name %user|Password %pwd"
     //% subcategory=ThingSpeak
     //% blockExternalInputs=true
     export function connectThingSpeak(user: string, pwd: string): void {
         connectMQTT("mqtt.thingspeak.com", 1883, "" + Math.randomRange(0, 100000000000000), user, pwd);
     }
 
-    //% block="Send ThingSpeak | Channel ID %id | API Key %api | field1 %field1 || field2: %field2 field3: %field3 field4: %field4 field5: %field5 field6: %field6 field7: %field7 field8: %field8""
+    //% block="Send ThingSpeak|Channel ID %id|API Key %api|field1: %field1||field2: %field2 field3: %field3 field4: %field4 field5: %field5 field6: %field6 field7: %field7 field8: %field8""
     //% subcategory=ThingSpeak
     //% blockExternalInputs=true
     //% expandableArgumentMode="enabled"
