@@ -96,6 +96,7 @@ namespace MQTT {
     //% block="Subscribe topic %topic"
     //% weight=47
     export function MQTTSub(topic: string): void {
+        basic.pause(1000);
         serial.writeString("+MQTTSub\n");
         basic.pause(2000);
         serial.writeString(topic + "\n");
@@ -105,6 +106,7 @@ namespace MQTT {
     //% block="Publish to topic %topic | message %payload"
     //% weight=46
     export function MQTTPub(topic: string, payload: string): void {
+        basic.pause(1000);
         serial.writeString("+MQTTPub\n");
         basic.pause(2000);
         serial.writeString(topic + "\n");
