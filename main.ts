@@ -74,7 +74,7 @@ namespace MQTT {
         serial.writeString(pwd + "\n");
     }
 
-    //% block="Connect to MQTT server %server | Port %port | ID %id | Username %user | Password %password"
+    //% block="Connect to MQTT server %server|Port %port|ID %id|Username %user|Password %password"
     //% blockExternalInputs=true
     //% weight=48
     export function connectMQTT(server: string, port: number, id: string, user: string, password: string): void {
@@ -96,6 +96,7 @@ namespace MQTT {
     //% block="Subscribe topic %topic"
     //% weight=47
     export function MQTTSub(topic: string): void {
+        basic.pause(1000);
         serial.writeString("+MQTTSub\n");
         basic.pause(2000);
         serial.writeString(topic + "\n");
@@ -105,6 +106,7 @@ namespace MQTT {
     //% block="Publish to topic %topic | message %payload"
     //% weight=46
     export function MQTTPub(topic: string, payload: string): void {
+        basic.pause(1000);
         serial.writeString("+MQTTPub\n");
         basic.pause(2000);
         serial.writeString(topic + "\n");
@@ -169,17 +171,20 @@ namespace MQTT {
 
     //--------------------------------------- ThingSpeak ---------------------------------------
 
-    //% block="Connect to ThingSpeak | User Name %user | Password %pwd"
+    //% block="Connect to ThingSpeak|User Name %user|Password %pwd"
     //% subcategory=ThingSpeak
     //% blockExternalInputs=true
     export function connectThingSpeak(user: string, pwd: string): void {
         connectMQTT("mqtt.thingspeak.com", 1883, "" + Math.randomRange(0, 100000000000000), user, pwd);
     }
 
-    //% block="Send ThingSpeak | Channel ID %id | API Key %api | Data %fields"
+    //% block="Send ThingSpeak|Channel ID %id|API Key %api|field1: %field1||field2: %field2 field3: %field3 field4: %field4 field5: %field5 field6: %field6 field7: %field7 field8: %field8""
     //% subcategory=ThingSpeak
     //% blockExternalInputs=true
-    export function sendThingSpeak(id: number, api: string, fields: string[]): void {
+    //% expandableArgumentMode="enabled"
+    export function sendThingSpeak(id: number, api: string, field1: number, field2?: number, field3?: number, field4?: number,
+        field5?: number, field6?: number, field7?: number, field8?: number): void {
+        let fields: number[] = [field1, field2, field3, field4, field5, field6, field7, field8]
         let ThingSpeakTopic: string = "channels/" + id + "/publish/" + api;
         let payload: string = "";
         for (let i = 0; i < fields.length; i++) {
