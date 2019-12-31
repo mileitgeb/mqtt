@@ -83,34 +83,8 @@ namespace MQTT {
         serial.writeString(ssid + "\n");
         basic.pause(2000);
         serial.writeString(pwd + "\n");*/
-        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 6000)
+        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 10000)
         writeToSerial("AT+CIPSTA?", 6000)
-        serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
-            let serial_str = serial.readString();
-
-            if (serial_str.includes("WiFi connected")) {
-                FlagWiFiCon = true;
-                if (wifiEvtConFlag) wificonnected();
-            }
-            if (serial_str.includes("WiFi disconnected")) {
-                FlagWiFiCon = false;
-                if (wifiEvtDConFlag) wifidisconnected();
-            }
-            if (serial_str.includes("MQTT connected")) {
-                FlagMQTTCon = true;
-                if (mqttEvtConFlag) mqttconnected();
-            }
-            if (serial_str.includes("MQTT disconnect")) {
-                FlagMQTTCon = false;
-                if (mqttEvtDConFlag) mqttdisconnected();
-            }
-            if (serial_str.includes("+MQM") && mqttEvtRecFlag) {
-                let comma_pos: number = serial_str.indexOf(",");
-                let topic: string = serial_str.substr(5, comma_pos - 5);
-                let msg: string = serial_str.substr(comma_pos + 1, serial_str.length - 5 - 1 - topic.length - 2);
-                mqttmessage(topic, msg);
-            }
-        })
     }
 
     //% block="Connect to MQTT server %server|Port %port|ID %id|Username %user|Password %password"
