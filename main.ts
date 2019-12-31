@@ -46,7 +46,6 @@ namespace MQTT {
         writeToSerial("AT+RST", 2000)
         // WIFI mode = Station mode (client):
         writeToSerial("AT+CWMODE=1", 5000)
-        writeToSerial("AT+CWJAP=\"" + "FRITZ!Box 4040 RA" + "\",\"" + "09697271150147582482" + "\"", 6000)
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
@@ -85,6 +84,7 @@ namespace MQTT {
         basic.pause(2000);
         serial.writeString(pwd + "\n");*/
         writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 6000)
+        writeToSerial("AT+CIPSTA?", 6000)
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
