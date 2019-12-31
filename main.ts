@@ -1,3 +1,20 @@
+enum HttpMethod {
+    GET,
+    POST,
+    PUT,
+    HEAD,
+    DELETE,
+    PATCH,
+    OPTIONS,
+    CONNECT,
+    TRACE
+}
+
+enum Newline {
+    CRLF,
+    LF,
+    CR
+}
 //%color=#0B0B61 icon="\uf1eb" block="MQTT"
 
 namespace MQTT {
