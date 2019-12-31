@@ -84,7 +84,7 @@ namespace MQTT {
         basic.pause(2000);
         serial.writeString(pwd + "\n");*/
         writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 10000)
-        writeToSerial("AT+CIPSTA?", 6000)
+        writeToSerial("AT+CIFSR?", 6000)
     }
 
     //% block="Connect to MQTT server %server|Port %port|ID %id|Username %user|Password %password"
