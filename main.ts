@@ -8,7 +8,8 @@ namespace MQTT {
             basic.pause(waitTime)
         }
     }
-    
+     let pauseBaseValue: number = 1000
+
 
     //% shim=serialBuffer::setSerialBuffer
     function setSerialBuffer(size: number): void {
@@ -189,6 +190,49 @@ namespace MQTT {
     //% blockId="wfb_at" block="execute AT command %command and then wait %waitTime ms"
     export function executeAtCommand(command: string, waitTime: number): void {
         writeToSerial(command, waitTime)
+    }
+    
+    /**
+     * Execute HTTP method.
+     * @param method HTTP method, eg: HttpMethod.GET
+     * @param host Host, eg: "google.com"
+     * @param port Port, eg: 80
+     * @param urlPath Path, eg: "/search?q=something"
+     * @param headers Headers
+     * @param body Body
+     */
+    //% weight=96
+    //% blockId="wfb_http" block="execute HTTP method %method|host: %host|port: %port|path: %urlPath||headers: %headers|body: %body"
+    export function executeHttpMethod(method: HttpMethod, host: string, port: number, urlPath: string, headers?: string, body?: string): void {
+        let myMethod: string
+        switch (method) {
+            case HttpMethod.GET: myMethod = "GET"; break;
+            case HttpMethod.POST: myMethod = "POST"; break;
+            case HttpMethod.PUT: myMethod = "PUT"; break;
+            case HttpMethod.HEAD: myMethod = "HEAD"; break;
+            case HttpMethod.DELETE: myMethod = "DELETE"; break;
+            case HttpMethod.PATCH: myMethod = "PATCH"; break;
+            case HttpMethod.OPTIONS: myMethod = "OPTIONS"; break;
+            case HttpMethod.CONNECT: myMethod = "CONNECT"; break;
+            case HttpMethod.TRACE: myMethod = "TRACE";
+        }
+        // Establish TCP connection:
+        let data: string = "AT+CIPSTART=\"TCP\",\"" + host + "\"," + port
+        writeToSerial(data, pauseBaseValue * 6)
+        data = myMethod + " " + urlPath + " HTTP/1.1" + "\u000D" + "\u000A"
+            + "Host: " + host + "\u000D" + "\u000A"
+        if (headers && headers.length > 0) {
+            data += headers + "\u000D" + "\u000A"
+        }
+        if (data && data.length > 0) {
+            data += "\u000D" + "\u000A" + body + "\u000D" + "\u000A"
+        }
+        data += "\u000D" + "\u000A"
+        // Send data:
+        writeToSerial("AT+CIPSEND=" + (data.length + 2), pauseBaseValue * 3)
+        writeToSerial(data, pauseBaseValue * 6)
+        // Close TCP connection:
+        writeToSerial("AT+CIPCLOSE", pauseBaseValue * 3)
     }
 
     //--------------------------------------- ThingSpeak ---------------------------------------
