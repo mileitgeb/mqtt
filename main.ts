@@ -182,6 +182,16 @@ namespace MQTT {
     export function flagmqttconn(): boolean {
         return FlagMQTTCon;
     }
+    /**
+     * Execute AT command.
+     * @param command AT command, eg: "AT"
+     * @param waitTime Wait time after execution, eg: 1000
+     */
+    //% weight=97
+    //% blockId="wfb_at" block="execute AT command %command and then wait %waitTime ms"
+    export function executeAtCommand(command: string, waitTime: number): void {
+        writeToSerial(command, waitTime)
+    }
 
     //--------------------------------------- ThingSpeak ---------------------------------------
 
