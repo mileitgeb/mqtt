@@ -83,7 +83,8 @@ namespace MQTT {
         serial.writeString(ssid + "\n");
         basic.pause(2000);
         serial.writeString(pwd + "\n");*/
-        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 10000)
+        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 6000)
+        basic.pause(6000);
         writeToSerial("AT+CIFSR?", 6000)
     }
 
