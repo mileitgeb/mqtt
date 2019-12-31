@@ -1,6 +1,14 @@
 //%color=#0B0B61 icon="\uf1eb" block="MQTT"
 
 namespace MQTT {
+    
+    function writeToSerial(data: string, waitTime: number): void {
+        serial.writeString(data + "\u000D" + "\u000A")
+        if (waitTime > 0) {
+            basic.pause(waitTime)
+        }
+    }
+    
 
     //% shim=serialBuffer::setSerialBuffer
     function setSerialBuffer(size: number): void {
@@ -35,6 +43,9 @@ namespace MQTT {
     //% weight = 50
     export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
         serial.redirect(tx, rx, baudrate);
+        writeToSerial("AT+RST", 2000)
+        // WIFI mode = Station mode (client):
+        writeToSerial("AT+CWMODE=1", 5000)
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
@@ -66,12 +77,13 @@ namespace MQTT {
     //% block="Set WiFi to SSID %ssid | PWD %pwd"
     //% weight=49
     export function setWiFi(ssid: string, pwd: string): void {
-        basic.pause(5000);
+        /*basic.pause(5000);
         serial.writeString("+WiFi\n");
         basic.pause(2000);
         serial.writeString(ssid + "\n");
         basic.pause(2000);
-        serial.writeString(pwd + "\n");
+        serial.writeString(pwd + "\n");*/
+        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 6000)
     }
 
     //% block="Connect to MQTT server %server|Port %port|ID %id|Username %user|Password %password"
