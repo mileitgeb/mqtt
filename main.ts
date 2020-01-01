@@ -52,14 +52,14 @@ namespace MQTT {
     let FlagMQTTCon: boolean = false;
     let FlagWiFiCon: boolean = false;
 
-    //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate|SSID %ssid| PWD %pwd"
+    //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate"
     //% baudrate.defl=BaudRate.BaudRate115200
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
     //% tx.fieldOptions.tooltips="false"
     //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
     //% rx.fieldOptions.tooltips="false"
     //% weight = 50
-    export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate, ssid: ssid, pwd:pwd ): void {
+    export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
         serial.redirect(tx, rx, baudrate);
         writeToSerial("AT+RST", 2000)
         writeToSerial("AT+GMR", 5000)
@@ -67,7 +67,7 @@ namespace MQTT {
         writeToSerial("AT+CWMODE=1", 5000)
         writeToSerial("AT+CIPMUX=1", 3000)
         writeToSerial("AT+CIPSERVER=1,333", 3000)
-        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 6000)
+        writeToSerial("AT+CWJAP=\"" + "FRITZ!Box 4040 RA" + "\",\"" + "09697271150147582482" + "\"", 6000)
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
