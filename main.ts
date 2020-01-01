@@ -62,20 +62,19 @@ namespace MQTT {
     export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
         serial.redirect(tx, rx, baudrate);
         writeToSerial("AT+RST", 2000)
-        writeToSerial("AT+GMR", 5000)
+        //writeToSerial("AT+GMR", 5000)
         // WIFI mode = Station mode (client):
-        writeToSerial("AT+CWMODE=1", 5000)
-        writeToSerial("AT+CIPMUX=1", 3000)
-        writeToSerial("AT+CIPSERVER=1,333", 3000)
-        writeToSerial("AT+CWJAP=\"" + "FRITZ!Box 4040 RA" + "\",\"" + "09697271150147582482" + "\"", 6000)
+        //writeToSerial("AT+CWMODE=1", 5000)
+        //writeToSerial("AT+CIPMUX=1", 3000)
+        //writeToSerial("AT+CIPSERVER=1,333", 3000)
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
-            if (serial_str.includes("WiFi connected")) {
+            if (serial_str.includes("WIFI CONN")) {
                 FlagWiFiCon = true;
                 if (wifiEvtConFlag) wificonnected();
             }
-            if (serial_str.includes("WiFi disconnected")) {
+            if (serial_str.includes("WIFI DISCONN")) {
                 FlagWiFiCon = false;
                 if (wifiEvtDConFlag) wifidisconnected();
             }
