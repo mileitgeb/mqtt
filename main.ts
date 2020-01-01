@@ -62,6 +62,7 @@ namespace MQTT {
     export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
         serial.redirect(tx, rx, baudrate);
         writeToSerial("AT+RST", 2000)
+        writeToSerial("AT+GMR", 5000)
         // WIFI mode = Station mode (client):
         writeToSerial("AT+CWMODE=1", 5000)
         writeToSerial("AT+CIPMUX=1", 3000)
