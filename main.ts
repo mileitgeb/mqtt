@@ -52,7 +52,7 @@ namespace MQTT {
     let FlagMQTTCon: boolean = false;
     let FlagWiFiCon: boolean = false;
 
-    //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate"
+    //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate |SSID %ssid | PWD %pwd"
     //% baudrate.defl=BaudRate.BaudRate115200
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
     //% tx.fieldOptions.tooltips="false"
@@ -64,6 +64,9 @@ namespace MQTT {
         writeToSerial("AT+RST", 2000)
         // WIFI mode = Station mode (client):
         writeToSerial("AT+CWMODE=1", 5000)
+        writeToSerial("AT+CIPMUX=1", 3000)
+        writeToSerial("AT+CIPSERVER=1,333", 3000)
+        writeToSerial("AT+CWJAP=\"" + ssid + "\",\"" + pwd + "\"", 6000)
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let serial_str = serial.readString();
 
