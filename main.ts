@@ -59,7 +59,7 @@ namespace MQTT {
     //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
     //% rx.fieldOptions.tooltips="false"
     //% weight = 50
-    export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate): void {
+    export function initializeWifi(tx: SerialPin, rx: SerialPin, baudrate: BaudRate, ssid: ssid, pwd:pwd ): void {
         serial.redirect(tx, rx, baudrate);
         writeToSerial("AT+RST", 2000)
         writeToSerial("AT+GMR", 5000)
