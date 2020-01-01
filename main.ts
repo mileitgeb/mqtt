@@ -52,7 +52,7 @@ namespace MQTT {
     let FlagMQTTCon: boolean = false;
     let FlagWiFiCon: boolean = false;
 
-    //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate |SSID %ssid | PWD %pwd"
+    //% block="Initialize WiFi TX %tx|RX %rx|Baud rate %baudrate|SSID %ssid| PWD %pwd"
     //% baudrate.defl=BaudRate.BaudRate115200
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
     //% tx.fieldOptions.tooltips="false"
